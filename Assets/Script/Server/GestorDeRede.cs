@@ -18,7 +18,11 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
+    // Connect With The Server
+    private void Start()
+    {
+        PhotonNetwork.ConnectUsingSettings();
+    }
     // Called When User Connect With The Server
     private void OnConnectedToServer()
     {
