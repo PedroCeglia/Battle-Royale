@@ -6,7 +6,7 @@ using Photon.Pun;
 public class GestorDeRede : MonoBehaviourPunCallbacks
 {
     // Create A Instance of GestorDeRede
-    public static GestorDeRede Instance;
+    public static GestorDeRede Instance { get; private set; }
     // Check If Instance Has Already been created
     private void Awake()
     {
@@ -23,9 +23,20 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
     }
-    // Called When User Connect With The Server
-    private void OnConnectedToServer()
+    // Create Or Join A Random Room
+    public void JoinRandomRoom()
     {
-        
+        PhotonNetwork.JoinRandomOrCreateRoom(null, 12);
+    }
+    // User Leave The Room
+    public void UserLeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+    // Start The Game To All Users
+    [PunRPC]
+    public void StartTheGame(string scene)
+    {
+        PhotonNetwork.LoadLevel(scene);
     }
 }
