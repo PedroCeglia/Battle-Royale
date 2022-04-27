@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPunCallbacks
 {
     [Header("Widgets")]
     private CharacterController controller;
@@ -24,10 +26,27 @@ public class Player : MonoBehaviour
     private int TotalHealth;
     [SerializeField]
     private int health;
+    public bool isMine { get; private set; }
+    private Cam camera;
 
     [Header("Player Canvas")]
     public GameObject PlayerCanvas;
 
+    // Player Photon
+    private Photon.Realtime.Player _photonPlayer;
+    private int _id;
+
+    [PunRPC]
+    private void Initialize(Photon.Realtime.Player player)
+    {
+        _photonPlayer = player;
+        _id = _photonPlayer.ActorNumber;
+        GameController.Instance._jogadores.Add(this);
+        if (photonView.IsMine)
+        {
+            isMine = true;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -42,12 +61,16 @@ public class Player : MonoBehaviour
 
         // Config Canvas
         SetCanvas();
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
+        if (isMine)
+        {
+            Move();
+        }
     }
 
     private void LateUpdate()
