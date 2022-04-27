@@ -26,17 +26,18 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
     // Create Or Join A Random Room
     public void JoinRandomRoom()
     {
-        PhotonNetwork.JoinRandomOrCreateRoom(null, 12);
+        PhotonNetwork.JoinRandomOrCreateRoom();
     }
     // User Leave The Room
     public void UserLeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
     }
+
     // Start The Game To All Users
     [PunRPC]
-    public void StartTheGame(string scene)
+    public void StartTheGame()
     {
-        PhotonNetwork.LoadLevel(scene);
+        PhotonNetwork.LoadLevel("GameScene");
     }
 }
