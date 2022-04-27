@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class MenuController : MonoBehaviourPunCallbacks
 {
@@ -42,15 +41,18 @@ public class MenuController : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         SetMenuActive(_menuLoadRoom.gameObject);
-        if(PhotonNetwork.PlayerList.Length == 2)
+        Debug.Log(PhotonNetwork.PlayerList.Length);
+        if (PhotonNetwork.PlayerList.Length == 2)
         {
-            GestorDeRede.Instance.photonView.RPC("StartTheGame", RpcTarget.All , "GameScene");
+            GestorDeRede.Instance.photonView.RPC("StartTheGame", RpcTarget.All);
         }
         else if (PhotonNetwork.PlayerList.Length > 2)
         {
             UserLeaveRoom();
         }
     }
+
+
 
     // User Leave The Room
     public void UserLeaveRoom()
