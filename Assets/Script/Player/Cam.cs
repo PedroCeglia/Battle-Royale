@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Cam : MonoBehaviour
+public class Cam : MonoBehaviourPunCallbacks
 {
-    private Transform player;
+    private List<GameObject> players = new List<GameObject>();
+    private Transform playerLocation;
+    private bool _verifyAllUsers;
     [SerializeField]
     private int smooth;
     [SerializeField]
@@ -15,16 +18,51 @@ public class Cam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         smooth = 8;
         zP = 27.3f;
         yP = 35f;
     }
 
+    // Get User Player
+    void GetUserPlayer() {
+        Debug.Log(players.Count);
+        foreach(GameObject user in players)
+        {
+            Player player = user.GetComponent<Player>();
+            if (player.isMine) {
+                playerLocation = player.transform;
+                _verifyAllUsers = true;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (!_verifyAllUsers)
+        {
+            if(players.Count == 0) {
+                players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+            }else if (players.Count < PhotonNetwork.PlayerList.Length)
+            {
+                players.Clear();
+                players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+            }
+            else if (players.Count == PhotonNetwork.PlayerList.Length)
+            {
+                GetUserPlayer();
+                _verifyAllUsers = true;
+            }
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
+        if(playerLocation != null)
+        {
+            Move();
+        }
     }
 
     private void Move()
@@ -32,37 +70,36 @@ public class Cam : MonoBehaviour
 
         // Set Z Position
         float camPz;
-        if(player.position.z >= 578f)
+        if(playerLocation.position.z >= 578f)
         {
             camPz = 578f - zP;
         }
-        else if (player.position.z <= 387.835)
+        else if (playerLocation.position.z <= 387.835)
         {
             camPz = 387.835f - zP;
         }
         else
         {
-            camPz = player.position.z - zP;
+            camPz = playerLocation.position.z - zP;
         }
 
         // Set X Position
         float camPx;
-        if(player.position.x >= 569.9717f)
+        if(playerLocation.position.x >= 569.9717f)
         {
             camPx = 569.9717f;
         }
-        else if (player.position.x <= 390.8779)
+        else if (playerLocation.position.x <= 390.8779)
         {
             camPx = 390.8779f;
         }
         else
         {
-            camPx = player.position.x;
+            camPx = playerLocation.position.x;
         }
 
         // Set Cam Position And Add a Lerp(Smooth)
         Vector3 folling = new Vector3(camPx, yP, camPz);
-        //Vector3 folling = new Vector3(player.position.x, yP, player.position.z -zP);
         transform.position = Vector3.Lerp(transform.position, folling, smooth * Time.deltaTime);
     }
 }
