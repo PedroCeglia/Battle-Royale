@@ -3,65 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-
-public class Player : MonoBehaviourPunCallbacks
+public class PlayerMoviment : MonoBehaviourPunCallbacks
 {
     [Header("Widgets")]
     private CharacterController controller;
     private Animator anim;
-    public GameObject gun;
 
     [Header("Atributes")]
-    private bool isWalk;
-    public bool isAttack;
+    public bool isAttack = false;
     [SerializeField]
     private int speed;
     private float turnSmoothVelocity;
     [SerializeField]
     private float smoothHotTime;
     private Vector3 moveDirection;
-    public int hitForce;
     private int gravity;
-    [SerializeField]
-    private int TotalHealth;
-    [SerializeField]
-    private int health;
-    public bool isMine { get; private set; }
-    private Cam camera;
-
-    [Header("Player Canvas")]
-    public GameObject PlayerCanvas;
 
     // Player Photon
-    private Photon.Realtime.Player _photonPlayer;
+    public bool isMine { get; private set; } = false;
+    private Player _photonPlayer;
     private int _id;
 
     [PunRPC]
-    private void Initialize(Photon.Realtime.Player player)
+    private void Initialize(Player player)
     {
         _photonPlayer = player;
         _id = _photonPlayer.ActorNumber;
         GameController.Instance._jogadores.Add(this);
         if (photonView.IsMine)
         {
-            isMine = true;
+            isMine = true;   
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // Config Attributes
-        health = TotalHealth;
-        hitForce = 1;
-
         // Start Widgets
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-
-        // Config Canvas
-        SetCanvas();
-
     }
 
     // Update is called once per frame
@@ -71,11 +51,6 @@ public class Player : MonoBehaviourPunCallbacks
         {
             Move();
         }
-    }
-
-    private void LateUpdate()
-    {
-        FixedRotationCanvas();
     }
     // Move Player 
     private void Move()
@@ -87,8 +62,9 @@ public class Player : MonoBehaviourPunCallbacks
             float vertical = Input.GetAxis("Vertical");
             Vector3 moviment = new Vector3(horizontal, 0f, vertical);
 
+
             // Verify if moviment is != null && if Attack is null
-            if(moviment.magnitude != 0 && !isAttack) 
+            if (moviment.magnitude != 0 && !isAttack)
             {
                 anim.SetBool("isWalk", true);
 
@@ -99,6 +75,7 @@ public class Player : MonoBehaviourPunCallbacks
 
                 // Camera Rotation
                 moveDirection = Quaternion.Euler(0f, smoothAngle, 0f) * Vector3.forward * speed;
+                Debug.Log(moveDirection);
 
             }
             else if (!isAttack)
@@ -118,63 +95,7 @@ public class Player : MonoBehaviourPunCallbacks
             // If the Player isn´t touch the ground, he will fall
             moveDirection.y -= gravity * Time.deltaTime;
         }
-
         // Move Player
         controller.Move(moveDirection * Time.deltaTime);
-
-    }
-    // Set Health
-    public void SetHealth(int x)
-    {
-        // Verify if health + x is greater than TotalHealth
-        // and health is equals TotalHealth
-        // or x is lesser than 0
-        if ((TotalHealth != health && TotalHealth > health + x) || x < 0) 
-        { 
-            health += x;
-        } else if(TotalHealth < health + x)
-        {
-            health = TotalHealth;
-        }
-        // Config In Canvas
-        SetCanvas();
-        
-        if(x < 0)
-        {
-            anim.SetTrigger("isHit");
-        }
-        if (health <= 0)
-        {
-            anim.SetTrigger("isDead");
-        }
-    }
-
-    // Set TotalHealth
-    public void SetTotalHealth(int x)
-    {
-        TotalHealth += x;
-        health += x;
-
-        // Config In Canvas
-        SetCanvas();
-    }
-
-    // Set HitForce
-    public void SetHitForce(int x)
-    {
-        hitForce += x;
-    }
-
-    // Set Canvas
-    private void SetCanvas()
-    {
-        gameObject.GetComponent<PlayerCanvas>().SetHelathInCanvas(TotalHealth, health);
-    }
-
-    // Set Canvas Position
-    private void FixedRotationCanvas()
-    {
-        PlayerCanvas.transform.LookAt(Camera.main.transform);
-        PlayerCanvas.transform.Rotate(0f, 180f ,0);
     }
 }

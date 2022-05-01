@@ -27,15 +27,15 @@ public class GameController : MonoBehaviourPunCallbacks
 
     // Players List
     private int _playersNumber = 0;
-    public List<Player> _jogadores;
-    public List<Player> Jogadores { get => _jogadores; private set => _jogadores = value; }
+    public List<PlayerMoviment> _jogadores;
+    public List<PlayerMoviment> Jogadores { get => _jogadores; private set => _jogadores = value; }
 
 
     //Add a Player
     private void Start()
     {
         photonView.RPC("AddPlayer", RpcTarget.AllBuffered);
-        _jogadores = new List<Player>();
+        _jogadores = new List<PlayerMoviment>();
     }
 
     // Add Player
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviourPunCallbacks
     {
         // Create a Player Instance using Photon
         var playerObj = PhotonNetwork.Instantiate(_localizacaoPrefab, _spawnList[Random.Range(0, _spawnList.Length)].position, Quaternion.identity);
-        var player = playerObj.GetComponent<Player>();
+        var player = playerObj.GetComponent<PlayerMoviment>();
         // Initialize Player And Pass A Local Player as Parameter
         player.photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
     }

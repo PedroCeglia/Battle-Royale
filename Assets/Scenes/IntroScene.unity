@@ -502,12 +502,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545633605}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 514.57697, y: 203.68419, z: 7.890259}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1566856819}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &545633607
 MonoBehaviour:
@@ -540,7 +540,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 999
+  sceneViewId: 77
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &557168381
@@ -1723,8 +1723,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 514.57697, y: 203.68419, z: 7.890259}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 545633606}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2186,6 +2185,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2935746778470791202, guid: da1d1994dacdd8a4c80bb54bbb00551c, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9086902283554839267, guid: da1d1994dacdd8a4c80bb54bbb00551c, type: 3}
       propertyPath: m_Name
       value: PlayerManMenu
@@ -2242,5 +2245,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8192156472758476406, guid: da1d1994dacdd8a4c80bb54bbb00551c, type: 3}
+    - {fileID: 2935746778470791202, guid: da1d1994dacdd8a4c80bb54bbb00551c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: da1d1994dacdd8a4c80bb54bbb00551c, type: 3}

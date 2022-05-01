@@ -216,8 +216,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 392.6563, y: 1.0884049, z: 511.4943}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1090854636}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8904,12 +8903,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090854635}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 392.6563, y: 1.0884049, z: 511.4943}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 21830454}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1090854637
 MonoBehaviour:
@@ -8958,7 +8957,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 999
+  sceneViewId: 777
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!4 &1099175277 stripped
@@ -17364,49 +17363,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc05ba61ce738042bc5ba5828bcae3f, type: 3}
---- !u!1 &6252596634976604251 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9151916500085775460, guid: 5bc05ba61ce738042bc5ba5828bcae3f, type: 3}
-  m_PrefabInstance: {fileID: 3010528886572403775}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6252596634976604252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6252596634976604251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1152daeb115cd3341bcebb496bee2297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xRadius: 1.2
-  yHeight: 1
-  DecreaseSpeed: 0.01
-  DecreaseWaitTime: 7
-  Shrinking: 0
-  isDecrease: 0
-  PlayerDamageTime: 3
-  DamagePower: 5
-  inWall: 1
-  isDamage: 0
-  xRadiusSafe: 1.2
-  yHeightSafe: 1
---- !u!136 &6252596634976604253
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6252596634976604251}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 100
-  m_Height: 50
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &6252596634976604254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8379496029230614238, guid: 5bc05ba61ce738042bc5ba5828bcae3f, type: 3}

@@ -794,11 +794,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3878492722659288242}
   - component: {fileID: 1935304309611164455}
-  - component: {fileID: 4520701855957716979}
+  - component: {fileID: 3251194550985719206}
+  - component: {fileID: 7332749471486243108}
+  - component: {fileID: 2878287485551412300}
   - component: {fileID: 2700705376082928760}
   - component: {fileID: 5809178175903987122}
-  - component: {fileID: 4077361792146086780}
   - component: {fileID: 6585455602701228737}
+  - component: {fileID: 7781197499732487635}
+  - component: {fileID: 7204415388576444536}
   m_Layer: 8
   m_Name: PlayerMan
   m_TagString: Player
@@ -843,7 +846,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4520701855957716979
+--- !u!114 &3251194550985719206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -852,17 +855,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 3433551934584215913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f0c729d93c4934eb45cde1d9a25f19, type: 3}
+  m_Script: {fileID: 11500000, guid: eb55611cb529cfc47b94ff159f33d287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 2345738445164229740}
-  isAttack: 0
-  speed: 8
-  smoothHotTime: 0.05
   hitForce: 0
   TotalHealth: 100
   health: 100
   PlayerCanvas: {fileID: 4114296484155238072}
+--- !u!114 &7332749471486243108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433551934584215913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1c4584359ab9c46880ee30f418c1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttack: 0
+  speed: 8
+  smoothHotTime: 0.05
+--- !u!114 &2878287485551412300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433551934584215913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2de79a7a7e12d45955be76a9c75cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerHealth: {fileID: 1212568880681600680}
+  HealthBar: {fileID: 5489217764540081657}
 --- !u!136 &2700705376082928760
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -895,20 +923,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.06, z: 0.1}
---- !u!114 &4077361792146086780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3433551934584215913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c2de79a7a7e12d45955be76a9c75cf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerHealth: {fileID: 1212568880681600680}
-  HealthBar: {fileID: 5489217764540081657}
 --- !u!114 &6585455602701228737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,10 +941,64 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7781197499732487635}
+  - {fileID: 7204415388576444536}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7781197499732487635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433551934584215913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &7204415388576444536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433551934584215913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 0
+    Name: isHit
+  - Type: 9
+    SynchronizeType: 0
+    Name: isAttack
+  - Type: 4
+    SynchronizeType: 0
+    Name: isWalk
+  - Type: 9
+    SynchronizeType: 0
+    Name: isDead
+  - Type: 4
+    SynchronizeType: 0
+    Name: isKnockDown
+  - Type: 4
+    SynchronizeType: 0
+    Name: isLobby
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &3471094033622086000
 GameObject:
   m_ObjectHideFlags: 0

@@ -83,7 +83,7 @@ public class WallZone : MonoBehaviour
         {
             isDamage = true;
             yield return new WaitForSeconds(PlayerDamageTime);
-            player.GetComponent<Player>().SetHealth(-DamagePower);
+            player.GetComponent<PlayerHealth>().SetHealth(-DamagePower);
             isDamage = false;
         }
     }

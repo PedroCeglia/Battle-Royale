@@ -29,7 +29,7 @@ public class Cam : MonoBehaviourPunCallbacks
         Debug.Log(players.Count);
         foreach(GameObject user in players)
         {
-            Player player = user.GetComponent<Player>();
+            PlayerMoviment player = user.GetComponent<PlayerMoviment>();
             if (player.isMine) {
                 playerLocation = player.transform;
                 _verifyAllUsers = true;

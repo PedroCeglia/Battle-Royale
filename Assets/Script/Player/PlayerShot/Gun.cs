@@ -42,7 +42,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            player.GetComponent<Player>().isAttack = false;
+            player.GetComponent<PlayerMoviment>().isAttack = false;
             timer += Time.deltaTime;
         }
     }
@@ -50,11 +50,11 @@ public class Gun : MonoBehaviour
     public void Attack()
     {
         playerAnim.SetTrigger("isAttack");
-        player.GetComponent<Player>().isAttack = true;
+        player.GetComponent<PlayerMoviment>().isAttack = true;
         Transform ammunationGroup = GameObject.FindGameObjectWithTag("AmmunationGroup").transform;
         GameObject shot = Instantiate(ammunition,  areaAttack.position, areaAttack.rotation, ammunationGroup);
         shot.GetComponent<Shoot>().player = areaAttack.forward;
-        shot.GetComponent<Shoot>().hitPower = player.GetComponent<Player>().hitForce;
+        shot.GetComponent<Shoot>().hitPower = player.GetComponent<PlayerHealth>().hitForce;
         shot.GetComponent<Shoot>().playerRot = player.transform.eulerAngles;
     }
 }

@@ -43,13 +43,13 @@ public class Items : MonoBehaviour
         switch (ItemType)
         {
             case 0:
-                player.GetComponent<Player>().SetHitForce(hitForceAdd);
+                player.GetComponent<PlayerHealth>().SetHitForce(hitForceAdd);
                 break;
             case 1:
-                player.GetComponent<Player>().SetTotalHealth(TotalHealthAdd);
+                player.GetComponent<PlayerHealth>().SetTotalHealth(TotalHealthAdd);
                 break;
             case 3:
-                player.GetComponent<Player>().SetHealth(TotalHealing);
+                player.GetComponent<PlayerHealth>().SetHealth(TotalHealing);
                 break;
         }
     }
