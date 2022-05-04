@@ -18,17 +18,6 @@ public class WallZone : MonoBehaviour
     [SerializeField]
     private bool isDecrease;
 
-    [Header("Player in Wall Zone")]
-    [SerializeField]
-    private float PlayerDamageTime;
-    [SerializeField]
-    private int DamagePower;
-    [SerializeField]
-    private bool inWall = true;
-    [SerializeField]
-    private bool isDamage;
-    private GameObject player;
-
     [Header("Safe Zone Atributes")]
     [SerializeField]
     private float xRadiusSafe;
@@ -46,10 +35,6 @@ public class WallZone : MonoBehaviour
     void Update()
     {
         transform.localScale = new Vector3(xRadius, yHeight, xRadius);
-        if (!inWall)
-        {
-            StartCoroutine("DamagePlayer", player );
-        }
         StartCoroutine("DecreaseTime");
     }
 
@@ -58,33 +43,24 @@ public class WallZone : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Player"))
         {
-            player = coll.gameObject;
-            inWall = false;
+            PlayerHealth player = coll.gameObject.GetComponent<PlayerHealth>();
+            player.inWall = false;
         }
     }
+    
     // If Player Enter the Collider
     private void OnTriggerEnter(Collider coll)
     {
         if (coll.gameObject.CompareTag("Player"))
         {
-            if (!inWall)
-            {
-                StopCoroutine("DamagePlayer");
-                inWall = true;
-                isDamage = false;
-            }
-        }
-    }
+            PlayerHealth player = coll.gameObject.GetComponent<PlayerHealth>();
 
-    // Damage Player
-    IEnumerator DamagePlayer(GameObject player)
-    {
-        if (!inWall && !isDamage)
-        {
-            isDamage = true;
-            yield return new WaitForSeconds(PlayerDamageTime);
-            player.GetComponent<PlayerHealth>().SetHealth(-DamagePower);
-            isDamage = false;
+            if (!player.inWall)
+            {
+                player.StopCoroutine("DamagePlayer");
+                player.inWall = true;
+                player.inWallDamage = false;
+            }
         }
     }
 

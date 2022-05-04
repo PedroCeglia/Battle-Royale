@@ -17,6 +17,11 @@ public class PlayerHealth : MonoBehaviour
     [Header("Player Canvas")]
     public GameObject PlayerCanvas;
 
+    [Header("WallZone")]
+    public bool inWall;
+    public bool inWallDamage;
+    [SerializeField] [Range(1, 10)] private float _inWallDamageTime;
+    [SerializeField] [Range(1, 10)] private int _inWallDamagePower;
 
 
     // Start is called before the first frame update
@@ -25,6 +30,8 @@ public class PlayerHealth : MonoBehaviour
         // Config Attributes
         health = TotalHealth;
         hitForce = 1;
+        inWall = true;
+        inWallDamage = false;
 
         // Start Widgets
         anim = GetComponent<Animator>();
@@ -33,6 +40,26 @@ public class PlayerHealth : MonoBehaviour
         SetCanvas();
     }
 
+    // Verify if player is inWall asnd Active DamagePlayer Coroutine
+    private void Update()
+    {
+        if (!inWall)
+        {
+            StartCoroutine("DamagePlayer");
+        }
+    }
+
+    // Damage Player
+    IEnumerator DamagePlayer()
+    {
+        if (!inWall && !inWallDamage)
+        {
+            inWallDamage = true;
+            yield return new WaitForSeconds(_inWallDamageTime);
+            SetHealth(-_inWallDamagePower);
+            inWallDamage = false;
+        }
+    }
 
     private void LateUpdate()
     {
