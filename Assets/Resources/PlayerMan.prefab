@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 2992615840113981384}
   - component: {fileID: 3730467015112266044}
   - component: {fileID: 6072880716462593185}
+  - component: {fileID: 190290856405224329}
   m_Layer: 8
   m_Name: AssaultRiflePBR
   m_TagString: Untagged
@@ -567,6 +568,28 @@ MonoBehaviour:
   fireRate: 0.1
   fireRange: 100
   timer: 0
+--- !u!114 &190290856405224329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345738445164229740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2537117715202830668
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +885,10 @@ MonoBehaviour:
   TotalHealth: 100
   health: 100
   PlayerCanvas: {fileID: 4114296484155238072}
+  inWall: 0
+  inWallDamage: 0
+  _inWallDamageTime: 3
+  _inWallDamagePower: 5
 --- !u!114 &7332749471486243108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,6 +969,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 7332749471486243108}
   - {fileID: 7781197499732487635}
   - {fileID: 7204415388576444536}
   sceneViewId: 0
@@ -979,22 +1007,22 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isHit
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isAttack
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isWalk
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isDead
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isKnockDown
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isLobby
   m_SynchronizeLayers:
   - SynchronizeType: 0
