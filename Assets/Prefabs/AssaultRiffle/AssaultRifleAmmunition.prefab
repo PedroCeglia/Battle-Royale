@@ -114,6 +114,8 @@ GameObject:
   - component: {fileID: 3291578092517441392}
   - component: {fileID: 9198144632304990283}
   - component: {fileID: 6615821723765049136}
+  - component: {fileID: -205003538962649176}
+  - component: {fileID: -9118730641884509114}
   m_Layer: 0
   m_Name: AssaultRifleAmmunition
   m_TagString: Untagged
@@ -209,6 +211,44 @@ CapsuleCollider:
   m_Height: 0.001
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-205003538962649176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7913873754836588760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-9118730641884509114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7913873754836588760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &7913873754836609438
 GameObject:
   m_ObjectHideFlags: 0
