@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class GestorDeRede : MonoBehaviourPunCallbacks
 {
@@ -23,11 +24,33 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
     }
-    // Create Or Join A Random Room
+    
+    
+    // Join A Random Room
     public void JoinRandomRoom()
     {
-        PhotonNetwork.JoinRandomOrCreateRoom();
+        PhotonNetwork.JoinRandomRoom();
     }
+    // Listener ( When dont have exist room open ) 
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        base.OnJoinRandomFailed(returnCode, message);
+        Debug.Log(message);
+        CreateAndJoinRoom();
+    }
+    // Create Room
+    private void CreateAndJoinRoom()
+    {
+        string randomRoomName = "Room :" + Random.Range(0, 100000);
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.IsOpen = true;
+        roomOptions.IsVisible = true;
+        roomOptions.MaxPlayers = 2;
+
+        PhotonNetwork.CreateRoom(randomRoomName, roomOptions);
+    }
+
+    
     // User Leave The Room
     public void UserLeaveRoom()
     {
