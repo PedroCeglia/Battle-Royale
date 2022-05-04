@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviourPunCallbacks
 {
     [Header("Widgets")]
     public GameObject ammunition;
     public Transform areaAttack;
     public GameObject player;
     private Animator playerAnim;
+    private PlayerMoviment playerMoviment;
 
     [Header("Atrributes")]
     [SerializeField]
@@ -26,6 +28,7 @@ public class Gun : MonoBehaviour
     void Start()
     {
         playerAnim = player.GetComponent<Animator>();
+        playerMoviment = player.GetComponent<PlayerMoviment>();
     }
 
     // Update is called once per frame
@@ -33,11 +36,14 @@ public class Gun : MonoBehaviour
     {
         if(timer >= fireRate)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (playerMoviment.isMine)
             {
-                Attack();
-                timer = 0f;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    photonView.RPC("Attack", RpcTarget.All);
+                    timer = 0f;
                 
+                }
             }
         }
         else
@@ -46,15 +52,17 @@ public class Gun : MonoBehaviour
             timer += Time.deltaTime;
         }
     }
-
+    [PunRPC]
     public void Attack()
     {
+        //
         playerAnim.SetTrigger("isAttack");
         player.GetComponent<PlayerMoviment>().isAttack = true;
         Transform ammunationGroup = GameObject.FindGameObjectWithTag("AmmunationGroup").transform;
-        GameObject shot = Instantiate(ammunition,  areaAttack.position, areaAttack.rotation, ammunationGroup);
+        GameObject shot =Instantiate(ammunition,  areaAttack.position, areaAttack.rotation, ammunationGroup);
         shot.GetComponent<Shoot>().player = areaAttack.forward;
         shot.GetComponent<Shoot>().hitPower = player.GetComponent<PlayerHealth>().hitForce;
         shot.GetComponent<Shoot>().playerRot = player.transform.eulerAngles;
     }
 }
+// PhotonNetwork.Instantiate("AssaultRifleAmmunition", areaAttack.position, areaAttack.rotation); //
