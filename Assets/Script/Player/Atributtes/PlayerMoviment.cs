@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-public class PlayerMoviment : MonoBehaviourPunCallbacks
+public class PlayerMoviment : MonoBehaviourPunCallbacks, IPunObservable
 {
     [Header("Widgets")]
     private CharacterController controller;
@@ -23,6 +23,10 @@ public class PlayerMoviment : MonoBehaviourPunCallbacks
     public bool isMine { get; private set; } = false;
     private Player _photonPlayer;
     private int _id;
+
+    // Lag
+    private float lag;
+    private Vector3 networkPosition;
 
     [PunRPC]
     private void Initialize(Player player)
@@ -47,6 +51,7 @@ public class PlayerMoviment : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(lag);
         if (isMine)
         {
             Move();
@@ -96,6 +101,34 @@ public class PlayerMoviment : MonoBehaviourPunCallbacks
             moveDirection.y -= gravity * Time.deltaTime;
         }
         // Move Player
-        controller.Move(moveDirection * Time.deltaTime);
+        if(lag > 0)
+        {
+            controller.Move(networkPosition * Time.deltaTime);
+        }
+        else
+        {
+            controller.Move(moveDirection * Time.deltaTime);
+        }
+        
+    }
+
+    [System.Obsolete]
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            stream.SendNext(moveDirection * Time.deltaTime);
+        }
+        else
+        {
+            networkPosition = (Vector3)stream.ReceiveNext();
+            Quaternion networkRotation = (Quaternion)stream.ReceiveNext();
+            moveDirection = (Vector3)stream.ReceiveNext();
+
+            lag = Mathf.Abs((float)(PhotonNetwork.Time - info.timestamp));
+            networkPosition += (moveDirection * lag);
+        }
     }
 }
