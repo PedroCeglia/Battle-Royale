@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviourPunCallbacks
 {
     [Header("Widgets")]
     private Animator anim;
 
     [Header("Atributes")]
-    public int hitForce;
     [SerializeField]
     private int TotalHealth;
     [SerializeField]
     private int health;
+    private int hitForce;
 
     [Header("Player Canvas")]
     public GameObject PlayerCanvas;
@@ -23,16 +24,22 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] [Range(1, 10)] private float _inWallDamageTime;
     [SerializeField] [Range(1, 10)] private int _inWallDamagePower;
 
+    // Photon Player
+    public int _idPlayer { get; private set; }
+
 
     // Start is called before the first frame update
     void Start()
     {
         // Config Attributes
         health = TotalHealth;
-        hitForce = 1;
         inWall = true;
         inWallDamage = false;
-
+        if (photonView.IsMine)
+        {
+            _idPlayer = PhotonNetwork.LocalPlayer.ActorNumber;
+        }
+        
         // Start Widgets
         anim = GetComponent<Animator>();
 
@@ -69,6 +76,7 @@ public class PlayerHealth : MonoBehaviour
     // Set Health
     public void SetHealth(int x)
     {
+        Debug.Log(x);
         // Verify if health + x is greater than TotalHealth
         // and health is equals TotalHealth
         // or x is lesser than 0
@@ -103,7 +111,7 @@ public class PlayerHealth : MonoBehaviour
         SetCanvas();
     }
 
-    // Set HitForce
+    // Set HitForce  // Mexer Pois Nao Faz nada !!!
     public void SetHitForce(int x)
     {
         hitForce += x;

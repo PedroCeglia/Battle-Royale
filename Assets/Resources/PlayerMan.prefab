@@ -564,10 +564,10 @@ MonoBehaviour:
   ammunition: {fileID: 7913873754836588760, guid: 6ebb40c5471147b4083e8658364e2b1c, type: 3}
   areaAttack: {fileID: 1910332907775194565}
   player: {fileID: 3433551934584215913}
-  damage: 6
-  fireRate: 0.1
-  fireRange: 100
-  timer: 0
+  _damage: 0
+  _fireRate: 0
+  _fireRange: 0
+  _timer: 0
 --- !u!114 &190290856405224329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -881,7 +881,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb55611cb529cfc47b94ff159f33d287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitForce: 0
   TotalHealth: 100
   health: 100
   PlayerCanvas: {fileID: 4114296484155238072}
@@ -889,6 +888,7 @@ MonoBehaviour:
   inWallDamage: 0
   _inWallDamageTime: 3
   _inWallDamagePower: 5
+  _idPlayer: 0
 --- !u!114 &7332749471486243108
 MonoBehaviour:
   m_ObjectHideFlags: 0
