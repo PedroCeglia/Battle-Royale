@@ -177,8 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c78aae201c866446b2d63f8e857d6dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  hitPower: 0
+  speed: 100
+  hitPower: 2
   player: {x: 0, y: 0, z: 0}
   playerRot: {x: 0, y: 0, z: 0}
 --- !u!54 &9198144632304990283
@@ -229,7 +229,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -9118730641884509114}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
