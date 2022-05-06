@@ -5,8 +5,10 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     private Rigidbody rig;
-    public int speed;
-    public int hitPower;
+    [Header("Attributes")]
+    [SerializeField] [Range(50, 250)] private int speed;
+    [SerializeField] [Range(1,10)] private int hitPower;
+    public int _playerId;
 
     public Vector3 player;
     public Vector3 playerRot;
@@ -15,7 +17,6 @@ public class Shoot : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody>();
-        speed = 100;
         transform.eulerAngles = new Vector3(90f, playerRot.y, 0f);
         Destroy(gameObject, 0.6f);
     }
@@ -38,5 +39,32 @@ public class Shoot : MonoBehaviour
             collision.gameObject.GetComponent<Present>().AddDamage(1);
             Destroy(gameObject, 0.05f);
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Verify if the player that shoted is the player that collided
+            PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+            Debug.Log(player._idPlayer);
+            Debug.Log(_playerId);
+            if (_playerId != player._idPlayer)
+            {
+                player.SetHealth(-hitPower);
+                Destroy(gameObject);
+            }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Verify if the player that shoted is the player that collided
+            PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+            Debug.Log(player._idPlayer);
+            Debug.Log(_playerId);
+            if (_playerId != player._idPlayer)
+            {
+                player.SetHealth(-hitPower);
+                Destroy(gameObject);
+            }
+        } 
     }
 }

@@ -9,39 +9,41 @@ public class Gun : MonoBehaviourPunCallbacks
     public GameObject ammunition;
     public Transform areaAttack;
     public GameObject player;
-    private Animator playerAnim;
-    private PlayerMoviment playerMoviment;
+    private Animator _playerAnim;
+    private PlayerMoviment _playerMoviment;
+    private PlayerHealth _playerHealth;
 
     [Header("Atrributes")]
     [SerializeField]
     [Range(1, 10)]
-    private int damage;
+    private int _damage;
     [SerializeField]
     [Range(0.1f, 1.5f)]
-    private float fireRate;
+    private float _fireRate;
     [SerializeField]
-    private float fireRange;
+    private float _fireRange;
     [SerializeField]
-    private float timer;
+    private float _timer;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerAnim = player.GetComponent<Animator>();
-        playerMoviment = player.GetComponent<PlayerMoviment>();
+        _playerAnim = player.GetComponent<Animator>();
+        _playerMoviment = player.GetComponent<PlayerMoviment>();
+        _playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timer >= fireRate)
+        if(_timer >= _fireRate)
         {
-            if (playerMoviment.isMine)
+            if (_playerMoviment.isMine)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     photonView.RPC("Attack", RpcTarget.All);
-                    timer = 0f;
+                    _timer = 0f;
                 
                 }
             }
@@ -49,20 +51,20 @@ public class Gun : MonoBehaviourPunCallbacks
         else
         {
             player.GetComponent<PlayerMoviment>().isAttack = false;
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
         }
     }
     [PunRPC]
     public void Attack()
     {
         //
-        playerAnim.SetTrigger("isAttack");
+        _playerAnim.SetTrigger("isAttack");
         player.GetComponent<PlayerMoviment>().isAttack = true;
         Transform ammunationGroup = GameObject.FindGameObjectWithTag("AmmunationGroup").transform;
         GameObject shot =Instantiate(ammunition,  areaAttack.position, areaAttack.rotation, ammunationGroup);
+        player.GetComponent<PlayerMoviment>().isAttack = false;
+        shot.GetComponent<Shoot>()._playerId = _playerHealth._idPlayer;
         shot.GetComponent<Shoot>().player = areaAttack.forward;
-        shot.GetComponent<Shoot>().hitPower = player.GetComponent<PlayerHealth>().hitForce;
         shot.GetComponent<Shoot>().playerRot = player.transform.eulerAngles;
     }
 }
-// PhotonNetwork.Instantiate("AssaultRifleAmmunition", areaAttack.position, areaAttack.rotation); //
