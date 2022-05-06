@@ -51,7 +51,6 @@ public class PlayerMoviment : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(lag);
         if (isMine)
         {
             Move();
@@ -80,7 +79,6 @@ public class PlayerMoviment : MonoBehaviourPunCallbacks, IPunObservable
 
                 // Camera Rotation
                 moveDirection = Quaternion.Euler(0f, smoothAngle, 0f) * Vector3.forward * speed;
-                Debug.Log(moveDirection);
 
             }
             else if (!isAttack)
