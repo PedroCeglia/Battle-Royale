@@ -37,7 +37,7 @@ public class Present : MonoBehaviour
             //Random.
             if (isBig) 
             {
-                SpawnBigPresents.Instance._hasBigPresent = false;
+                GameController.Instance._hasBigPresent = false;
                 GameObject item5 = Instantiate(itensList[Random.Range(0, 3)], transform.position + Vector3.up + Vector3.left * 3 + Vector3.back * 3, transform.rotation, ItemsGroup.transform);
                 GameObject item6 = Instantiate(itensList[Random.Range(0, 3)], transform.position + Vector3.up + Vector3.forward * 3 + Vector3.right * 3, transform.rotation, ItemsGroup.transform);
                 GameObject item7 = Instantiate(itensList[Random.Range(0, 3)], transform.position + Vector3.up + Vector3.forward * 3 + Vector3.left * 3, transform.rotation, ItemsGroup.transform);
