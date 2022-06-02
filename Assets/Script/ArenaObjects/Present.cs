@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Present : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class Present : MonoBehaviour
     [SerializeField]
     private List<GameObject> itensList = new List<GameObject>();
     private GameObject ItemsGroup;
+    private SpawnBigPresents _spawnBigPresents;
 
     // Start is called before the first frame update
     void Start()
     {
         ItemsGroup = GameObject.FindGameObjectWithTag("ItemsGroup");
+        _spawnBigPresents = GameObject.FindGameObjectWithTag("SpawnBigPresent").GetComponent<SpawnBigPresents>();
         if (isBig)
         {
             health = 12;
@@ -25,12 +28,7 @@ public class Present : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    [PunRPC]
     public void AddDamage(int hit)
     {
         health -= hit;
@@ -39,6 +37,7 @@ public class Present : MonoBehaviour
             //Random.
             if (isBig) 
             {
+                SpawnBigPresents.Instance._hasBigPresent = false;
                 GameObject item5 = Instantiate(itensList[Random.Range(0, 3)], transform.position + Vector3.up + Vector3.left * 3 + Vector3.back * 3, transform.rotation, ItemsGroup.transform);
                 GameObject item6 = Instantiate(itensList[Random.Range(0, 3)], transform.position + Vector3.up + Vector3.forward * 3 + Vector3.right * 3, transform.rotation, ItemsGroup.transform);
                 GameObject item7 = Instantiate(itensList[Random.Range(0, 3)], transform.position + Vector3.up + Vector3.forward * 3 + Vector3.left * 3, transform.rotation, ItemsGroup.transform);
