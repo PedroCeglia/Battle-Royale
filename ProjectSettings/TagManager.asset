@@ -7,6 +7,7 @@ TagManager:
   - AmmunationGroup
   - SafeZone
   - ItemsGroup
+  - SpawnBigPresent
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - present
   - player
   - items
-  - 
+  - spawnBigPresent
   - 
   - 
   - 
