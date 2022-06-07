@@ -158,8 +158,8 @@ public class Auth : MonoBehaviour
                     {
 
                         // Create User In Database
-                        //UserModel userDatabase = new UserModel(username, email, _user.UserId);
-                        //_databaseAPI.WriteNewPlayerDatabase(userDatabase);
+                        UserModel userDatabase = new UserModel(username, email, _user.UserId);
+                        RealtimeDatabase.Instance.CreateUserInDatabase(userDatabase);
 
                         //Create a user profile and set the username
                         UserProfile profile = new UserProfile { DisplayName = username };
