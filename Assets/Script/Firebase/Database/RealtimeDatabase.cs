@@ -34,4 +34,59 @@ public class RealtimeDatabase : MonoBehaviour
         _databaseRef = firebase.RootReference;
         _userRef = _databaseRef.Child("user");
     }
+
+    // Create user In Database
+    public void CreateUserInDatabase(UserModel userModel)
+    {
+        if(_databaseRef != null)
+        {
+            // Trasform the User Object in Json
+            string userJson = JsonUtility.ToJson(userModel);
+
+            // Create User In Database
+            _userRef.Child(userModel.id).SetRawJsonValueAsync(userJson);
+        }
+    }
+
+    // Set User Name In Database
+    public void SetUserNameInDatabase(string id, string username)
+    {
+        if(_databaseRef != null && id != null && username != null)
+        {
+            _userRef.Child(id).Child("username").SetValueAsync(username);
+        }
+    }
+    // Set Email Name In Database
+    public void SetUserEmailInDatabase(string id, string email)
+    {
+        if (_databaseRef != null && id != null && email != null)
+        {
+            _userRef.Child(id).Child("email").SetValueAsync(email);
+        }
+    }
+
+    // Get User By Id
+    public delegate void DelegateGetUserById(UserModel userModel);
+    public void GetUserById(string id, DelegateGetUserById setUser)
+    {
+        _userRef.Child(id)
+            .GetValueAsync()
+                .ContinueWith((task) => 
+                {
+                    if (task.IsCompleted)
+                    {
+                        // Get User Snapshot
+                        DataSnapshot snapshot = task.Result;
+
+                        // Transform Snapshot in Json
+                        string userJson = snapshot.GetRawJsonValue();
+
+                        // Transform Json in Object
+                        UserModel userModel = JsonUtility.FromJson<UserModel>(userJson);
+                        
+                        // Set User Function
+                        setUser(userModel);
+                    }
+                });
+    }
 }
