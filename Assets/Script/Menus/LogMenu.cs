@@ -58,13 +58,13 @@ public class LogMenu : MonoBehaviour
     // Close Singin Erro Mensage
     public void CloseSinginErroArea()
     {
-        _singinErroMensage.text = "";
+        _singinErroMensageField.text = "";
         _singinErroArea.SetActive(false);
     }
     // Close Login Erro Mensage
     public void CloseLoginErroArea()
     {
-        _loginErroMensage.text = "";
+        _loginErroMensageField.text = "";
         _loginErroArea.SetActive(false);
     }
 
