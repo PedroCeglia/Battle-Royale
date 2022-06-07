@@ -33,7 +33,8 @@ public class Auth : MonoBehaviour
         _authRef = authRef;
 
         // Create Auth User Listener
-
+        authRef.StateChanged += AuthStateChanged;
+        AuthStateChanged(this, null);
     }
 
     public delegate void GetErroMensage(string erroMensage);
@@ -183,5 +184,50 @@ public class Auth : MonoBehaviour
             }
         }
 
+    }
+
+    // Log Out User
+    public void LogOutUser()
+    {
+        if (_user != null && _authRef != null)
+        {
+            _authRef.SignOut();
+        }
+    }
+
+    // Track state changes of the auth object.
+    void AuthStateChanged(object sender, System.EventArgs eventArgs)
+    {
+        if (_authRef != null)
+        {
+            if (_authRef.CurrentUser != _user)
+            {
+                _user = _authRef.CurrentUser;
+
+                if (_user != null)
+                {
+                    // User is Log
+                }
+                else
+                {
+                    // User insn`t Log
+                }
+
+            }
+        }
+    }
+    
+
+    // Called before the Component Destroy
+    void OnDestroy()
+    {
+        if (_authRef != null)
+        {
+            // Destroy User Listener
+            _authRef.StateChanged -= AuthStateChanged;
+
+            // Destroy Auth Reference
+            _authRef = null;
+        }
     }
 }
