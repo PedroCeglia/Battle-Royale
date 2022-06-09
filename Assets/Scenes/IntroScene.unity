@@ -178,7 +178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &142457372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -254,13 +254,13 @@ MonoBehaviour:
   _loginEmail: {fileID: 863152969}
   _loginPassword: {fileID: 2070696521}
   _loginErroArea: {fileID: 1049401341}
-  _loginErroMensage: {fileID: 931907203}
+  _loginErroMensageField: {fileID: 0}
   _menuSingin: {fileID: 1815879534}
   _singinName: {fileID: 564419820}
   _singinEmail: {fileID: 1577205426}
   _singinPassword: {fileID: 1496458275}
   _singinErroArea: {fileID: 524372417}
-  _singinErroMensage: {fileID: 734416423}
+  _singinErroMensageField: {fileID: 0}
 --- !u!1 &235219236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,13 +1320,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 564419821}
   m_TextComponent: {fileID: 1666447215}
   m_Placeholder: {fileID: 1860178990}
-  m_ContentType: 6
+  m_ContentType: 5
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 7
+  m_KeyboardType: 6
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 5
+  m_CharacterValidation: 4
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -1902,6 +1902,7 @@ MonoBehaviour:
   _menuIntro: {fileID: 972607255}
   _menuLobby: {fileID: 655991532}
   _menuLoadRoom: {fileID: 1709606564}
+  _menuLog: {fileID: 142457375}
 --- !u!1 &655991530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2071,7 +2072,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 718236785}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 142457375}
+        m_TargetAssemblyTypeName: LogMenu, Assembly-CSharp
+        m_MethodName: SinginUser
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &718236785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2986,7 +2999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &972607252
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4456,7 +4469,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1517022322}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 142457375}
+        m_TargetAssemblyTypeName: LogMenu, Assembly-CSharp
+        m_MethodName: LoginUser
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1517022322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5782,6 +5807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aabb26a0466e6140b1c6508e4aea53b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isConnect: 0
 --- !u!114 &1905213462
 MonoBehaviour:
   m_ObjectHideFlags: 0
