@@ -11,6 +11,7 @@ public class FirebaseConfig : MonoBehaviour
     private bool _verifyItIsOk;
     private FirebaseAuth _firebaseAuth;
     private FirebaseDatabase _firebaseDatabase;
+    public bool _isConnect;
 
     // Create Singleton
     public static FirebaseConfig Instance { get; private set; }
@@ -40,6 +41,7 @@ public class FirebaseConfig : MonoBehaviour
             {
                 _verifyItIsOk = false;
                 Debug.LogError("Não foi possivel resolver todas as dependencias: " + task.Result);
+                _isConnect = false;
             }
         });
     }
@@ -63,5 +65,8 @@ public class FirebaseConfig : MonoBehaviour
         // Pass to API´s Class
         Auth.Instance.SetAuthReference(_firebaseAuth);
         RealtimeDatabase.Instance.GetDatabaseInstance(_firebaseDatabase);
+
+        // Is Connect
+        _isConnect = true;
     }
 }
