@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class GameController : MonoBehaviourPunCallbacks
 {
@@ -31,7 +30,7 @@ public class GameController : MonoBehaviourPunCallbacks
     public List<PlayerMoviment> Jogadores { get => _jogadores; private set => _jogadores = value; }
     
     // Big Present
-    [SerializeField] public bool _hasBigPresent;  
+    [SerializeField] public bool _hasBigPresent;
 
 
     //Add a Player
@@ -61,4 +60,5 @@ public class GameController : MonoBehaviourPunCallbacks
         // Initialize Player And Pass A Local Player as Parameter
         player.photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
     }
+
 }
