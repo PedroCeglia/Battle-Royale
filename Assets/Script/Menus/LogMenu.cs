@@ -78,6 +78,7 @@ public class LogMenu : MonoBehaviour
                 if(_singinPassword.text.Length > 6)
                 {
                     // Create User
+                    Auth.Instance.CreateNewUser(_singinName.text, _singinEmail.text, _singinPassword.text, GetSinginMensageErro);
 
                     // Set Singin Field
                     ClearSinginFields();
