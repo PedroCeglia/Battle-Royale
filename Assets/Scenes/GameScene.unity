@@ -12080,9 +12080,8 @@ MonoBehaviour:
   - {fileID: 690547023}
   - {fileID: 1918730606}
   _jogadores: []
+  _playerLogMineId: 0
   _hasBigPresent: 0
-  _bigPresentSpawnObject: {fileID: 7250011773995506072, guid: c0ecaf9cec0b6e445940d6df90f73f79, type: 3}
-  _ListsFolder: {fileID: 1982621075}
 --- !u!114 &1090854638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15129,6 +15128,10 @@ PrefabInstance:
     - target: {fileID: 7250011773995506075, guid: c0ecaf9cec0b6e445940d6df90f73f79, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7250011773995506077, guid: c0ecaf9cec0b6e445940d6df90f73f79, type: 3}
+      propertyPath: _bigPresentPrefab
+      value: BigPresent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0ecaf9cec0b6e445940d6df90f73f79, type: 3}
