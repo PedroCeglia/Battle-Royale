@@ -38,6 +38,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             _idPlayer = PhotonNetwork.LocalPlayer.ActorNumber;
+            GameController.Instance._playerLogMineId = _idPlayer;
         }
         
         // Start Widgets
