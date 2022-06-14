@@ -28,6 +28,8 @@ public class GameController : MonoBehaviourPunCallbacks
     private int _playersNumber = 0;
     public List<PlayerMoviment> _jogadores;
     public List<PlayerMoviment> Jogadores { get => _jogadores; private set => _jogadores = value; }
+
+    public int _playerLogMineId;
     
     // Big Present
     [SerializeField] public bool _hasBigPresent;
