@@ -888,7 +888,6 @@ MonoBehaviour:
   inWallDamage: 0
   _inWallDamageTime: 3
   _inWallDamagePower: 5
-  _idPlayer: 0
 --- !u!114 &7332749471486243108
 MonoBehaviour:
   m_ObjectHideFlags: 0
