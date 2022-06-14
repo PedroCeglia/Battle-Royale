@@ -25,17 +25,18 @@ public class SpawnBigPresents : MonoBehaviourPunCallbacks
     private int _indexChoiceSpawn;
 
     [Header("----Present Prefab----")]
-    [SerializeField] private GameObject _bigPresentPrefab;
+    [SerializeField] private string _bigPresentPrefab;
 
     // Verify if has a big present
     void Update()
     {
+        // Get Spawn Postion List
         if (!_isAlready && !_isChoicing)
         {
             _isChoicing = true;
             if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC("ChoiceSpawnList", RpcTarget.All, Random.Range(1, 8));
+                photonView.RPC("ChoiceSpawnList", RpcTarget.AllBuffered, Random.Range(1, 8));
             }
         }
 
@@ -50,9 +51,9 @@ public class SpawnBigPresents : MonoBehaviourPunCallbacks
     {
         GameController.Instance._hasBigPresent = true;
         yield return new WaitForSeconds(_spanwTime);
-
-        photonView.RPC("CreatePresentObject", RpcTarget.All);
+        
         _indexChoiceSpawn += 1;
+        CreatePresentObject();
     }
 
     [PunRPC]
@@ -62,7 +63,6 @@ public class SpawnBigPresents : MonoBehaviourPunCallbacks
         _spawnListChoice = index;
     }
 
-    [PunRPC]
     private void CreatePresentObject()
     {
         if (GameController.Instance._hasBigPresent)
@@ -70,28 +70,28 @@ public class SpawnBigPresents : MonoBehaviourPunCallbacks
             switch (_spawnListChoice)
             {
                 case 1:
-                    Instantiate(_bigPresentPrefab, _spawns[_spawnPosition1[_indexChoiceSpawn]]);
+                    PhotonNetwork.Instantiate(_bigPresentPrefab, _spawns[_spawnPosition1[_indexChoiceSpawn]].position, Quaternion.identity);
                     break;
                 case 2:
-                    Instantiate(_bigPresentPrefab, _spawns[_spawnPosition2[_indexChoiceSpawn]]);
+                    PhotonNetwork.Instantiate(_bigPresentPrefab, _spawns[_spawnPosition2[_indexChoiceSpawn]].position, Quaternion.identity);
                     break;
                 case 3:
-                    Instantiate(_bigPresentPrefab, _spawns[_spawnPosition3[_indexChoiceSpawn]]);
+                    PhotonNetwork.Instantiate(_bigPresentPrefab, _spawns[_spawnPosition3[_indexChoiceSpawn]].position, Quaternion.identity);
                     break;
                 case 4:
-                    Instantiate(_bigPresentPrefab, _spawns[_spawnPosition4[_indexChoiceSpawn]]);
+                    PhotonNetwork.Instantiate(_bigPresentPrefab, _spawns[_spawnPosition4[_indexChoiceSpawn]].position, Quaternion.identity);
                     break;
                 case 5:
-                    Instantiate(_bigPresentPrefab, _spawns[_spawnPosition5[_indexChoiceSpawn]]);
+                    PhotonNetwork.Instantiate(_bigPresentPrefab, _spawns[_spawnPosition5[_indexChoiceSpawn]].position, Quaternion.identity);
                     break;
                 case 6:
-                    Instantiate(_bigPresentPrefab, _spawns[_spawnPosition6[_indexChoiceSpawn]]);
+                    PhotonNetwork.Instantiate(_bigPresentPrefab, _spawns[_spawnPosition6[_indexChoiceSpawn]].position, Quaternion.identity);
                     break;
                 case 7:
-                    Instantiate(_bigPresentPrefab, _spawns[_spawnPosition7[_indexChoiceSpawn]]);
+                    PhotonNetwork.Instantiate(_bigPresentPrefab, _spawns[_spawnPosition7[_indexChoiceSpawn]].position, Quaternion.identity);
                     break;
                 case 8:
-                    Instantiate(_bigPresentPrefab, _spawns[_spawnPosition8[_indexChoiceSpawn]]);
+                    PhotonNetwork.Instantiate(_bigPresentPrefab, _spawns[_spawnPosition8[_indexChoiceSpawn]].position ,Quaternion.identity);
                     break;
             }
         }   
