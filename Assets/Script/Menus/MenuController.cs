@@ -107,7 +107,6 @@ public class MenuController : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         SetMenuActive("load");
-        Debug.Log(PhotonNetwork.PlayerList.Length);
         if (PhotonNetwork.PlayerList.Length == 2)
         {
             // Create Room In Firebase

@@ -47,10 +47,10 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = true;
         roomOptions.MaxPlayers = 2;
 
-        PhotonNetwork.CreateRoom(randomRoomName, roomOptions);
+        PhotonNetwork.CreateRoom(randomRoomName, roomOptions);  
     }
 
-    
+     
     // User Leave The Room
     public void UserLeaveRoom()
     {
@@ -62,5 +62,11 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
     public void StartTheGame()
     {
         PhotonNetwork.LoadLevel("GameScene");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            // Block The Room Acess
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+        }
     }
 }
