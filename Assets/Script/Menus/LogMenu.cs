@@ -134,4 +134,19 @@ public class LogMenu : MonoBehaviour
         _hasLoginErroMensage = true;
         _loginErroMensage = erroMensage;
     }
+
+    // Verify if Exist A Mensage Erro
+    private void Update()
+    {
+        if (_hasLoginErroMensage)
+        {
+            _loginErroArea.SetActive(true);
+            _loginErroMensageField.text = _loginErroMensage;
+        }
+        if (_hasSinginErroMensage)
+        {
+            _singinErroArea.SetActive(true);
+            _singinErroMensageField.text = _singinErroMensage;
+        }
+    }
 }
