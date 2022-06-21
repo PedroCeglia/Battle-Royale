@@ -883,6 +883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalHealth: 100
   health: 100
+  hitForce: 0
   PlayerCanvas: {fileID: 4114296484155238072}
   inWall: 0
   inWallDamage: 0
