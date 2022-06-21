@@ -32,7 +32,10 @@ public class GameController : MonoBehaviourPunCallbacks
     public int _playerLogMineId;
     
     // Big Present
-    [SerializeField] public bool _hasBigPresent;
+    public bool _hasBigPresent;
+
+    // GameOver Menu
+    public GameOverMenu _gameOverMenu;
 
 
     //Add a Player

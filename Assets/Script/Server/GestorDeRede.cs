@@ -22,7 +22,10 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
     // Connect With The Server
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
     
     
@@ -68,5 +71,12 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
         }
+    }
+
+    public void BackToIntroScene()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel("IntroScene");
+        Destroy(gameObject);
     }
 }

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GameOverMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void SetMenuActive(bool cond)
     {
-        
+        Debug.Log("Change");
+        gameObject.SetActive(cond);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void returnToMenuLobby()
+    {   
+        Destroy(GameController.Instance.gameObject);
+        Destroy(FirebaseConfig.Instance.gameObject);
+        GestorDeRede.Instance.BackToIntroScene();
     }
 }

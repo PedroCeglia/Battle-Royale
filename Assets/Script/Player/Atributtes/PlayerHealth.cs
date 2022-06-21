@@ -9,11 +9,9 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     private Animator anim;
 
     [Header("Atributes")]
-    [SerializeField]
-    private int TotalHealth;
-    [SerializeField]
-    private int health;
-    private int hitForce;
+    [SerializeField] private int TotalHealth;
+    [SerializeField] private int health;
+    [SerializeField] private int hitForce;
 
     [Header("Player Canvas")]
     public GameObject PlayerCanvas;
@@ -24,10 +22,14 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     [SerializeField] [Range(1, 10)] private float _inWallDamageTime;
     [SerializeField] [Range(1, 10)] private int _inWallDamagePower;
 
+    [Header("GameOver UI")] 
+    private GameOverMenu _gameOverMenu; 
+
+
     // Photon Player
     public int _idPlayer { get; private set; }
 
-
+     
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +39,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         inWallDamage = false;
         if (photonView.IsMine)
         {
+            // Get Id Player
             _idPlayer = PhotonNetwork.LocalPlayer.ActorNumber;
             GameController.Instance._playerLogMineId = _idPlayer;
+            // Get Menu GameOver
+            _gameOverMenu = GameController.Instance._gameOverMenu;
         }
         
         // Start Widgets
@@ -77,28 +82,43 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
     // Set Health
     public void SetHealth(int x)
     {
-        Debug.Log(x);
-        // Verify if health + x is greater than TotalHealth
-        // and health is equals TotalHealth
-        // or x is lesser than 0
-        if ((TotalHealth != health && TotalHealth > health + x) || x < 0)
+        if(health > 0)
         {
-            health += x;
-        }
-        else if (TotalHealth < health + x)
-        {
-            health = TotalHealth;
-        }
-        // Config In Canvas
-        SetCanvas();
+            // Verify if health + x is greater than TotalHealth
+            // and health is equals TotalHealth
+            // or x is lesser than 0
+            if ((TotalHealth != health && TotalHealth > health + x) || x < 0)
+            {
+                health += x;
+            }
+            else if (TotalHealth < health + x)
+            {
+                health = TotalHealth;
+            }
+            // Config In Canvas
+            SetCanvas();
 
-        if (x < 0)
-        {
-            anim.SetTrigger("isHit");
-        }
-        if (health <= 0)
-        {
-            anim.SetTrigger("isDead");
+            // Config Animations
+            if (x < 0 && health >= 0)
+            {
+                anim.SetTrigger("isHit");
+            }
+            if (health <= 0)
+            {
+                anim.SetBool("isDead", true);
+
+                // Game Over Config
+
+                // Open GameOver Menu
+                if (photonView.IsMine)
+                {
+                    Debug.Log("ooioio");
+                    GameController.Instance._gameOverMenu.SetMenuActive(true);
+                }
+               
+                // Destroy Player
+                Destroy(gameObject, 1.2f);
+            }
         }
     }
 
@@ -130,6 +150,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks
         PlayerCanvas.transform.LookAt(Camera.main.transform);
         PlayerCanvas.transform.Rotate(0f, 180f, 0);
     }
+
 }
 
 
