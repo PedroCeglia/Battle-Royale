@@ -9,6 +9,8 @@ TagManager:
   - ItemsGroup
   - SpawnBigPresent
   - GameOverMenu
+  - Hideout
+  - UncoveryArea
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - player
   - items
   - spawnBigPresent
-  - 
+  - Grass
   - 
   - 
   - 
